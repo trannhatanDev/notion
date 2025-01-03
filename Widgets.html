@@ -95,13 +95,12 @@
 
 function dispalyGreetings(today){
         hrs = today.getHours();
-        name=""
         if (hrs < 12)
-            greet = 'Good Morning  '+name;
+            greet = 'I’ve always wanted to run away from everything, but now I don’t even know where to go';
         else if (hrs >= 12 && hrs <= 17)
-            greet = 'Good Afternoon '+name;
+            greet = 'I wanted to believe in something, but everything always falls apart';
         else if (hrs >= 17 && hrs <= 24)
-            greet = 'Good Evening  '+name;
+            greet = 'I'm scared. I'm scared of being alone, but I'm even more scared of being with someone';
         document.getElementById('greet').innerHTML = greet;
 
     }
