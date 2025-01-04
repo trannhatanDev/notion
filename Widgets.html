@@ -4,166 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greetings</title>
+    <title>Quote</title>
 
     <style>
-
-
-        body{
-            font-variant-caps: all-petite-caps;
-
-
-        }
 
         .widget {
             padding: 5px 5px ;
             color: #000000;
-            display: flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction: column;
-            max-width: 95%;
+            text-align: center;
+                max-width: 95%;
             margin: auto;
-            border: 3px solid #000000;
-            border-radius: 5px;
-            box-shadow: 2px 2px 1px 0px #000000;
-
-        }
-
-           
-        .greet{
-            font-size: 3em;
-        }
-
-        .date {
-      
-            font-family: monospace;
+            font-variant-caps: petite-caps;
             font-size: 2em;
+
         }
 
-        .clock {
-            font-family: monospace;
-            font-size: 2em;
-        }
+        div {
+             width: 95%;
+             min-height: 100px;
 
-        .time {
-            display: inline-block;
-            min-width: 20px;
-        }
+            background:
+                linear-gradient(to right, black 4px, transparent 4px) 0 0,
+                linear-gradient(to right, black 4px, transparent 4px) 0 100%,
+                linear-gradient(to left, black 4px, transparent 4px) 100% 0,
+                linear-gradient(to left, black 4px, transparent 4px) 100% 100%,
+                linear-gradient(to bottom, black 4px, transparent 4px) 0 0,
+                linear-gradient(to bottom, black 4px, transparent 4px) 100% 0,
+                linear-gradient(to top, black 4px, transparent 4px) 0 100%,
+                linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
 
-        .colon {
-            font-size: 1em;
-            display: inline-block;
-        }
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+}
 
      
-
-
-
-
     </style>
 </head>
 <body>
 
-
-
-
-<div class="container>">
-    <div class="widget">
-
-            <div class="greet" id="greet"></div>
-
-                <div class="date" id="date"></div>
-                <div class="clock">
-                    <div class="time" id="hour"></div>
-                    <div class="colon">:</div>
-                    <div class="time" id="min"></div>
-                    <div class="colon">:</div>
-                    <div class="time" id="sec"></div>
-                </div>
-           
-
-        
-
-    </div>
-</div>
-        
-
+    <div class="widget" id="widget"></div>
 
 
 <script>
 
-function dispalyGreetings(today){
-        hrs = today.getHours();
-        name=""
-        if (hrs < 12)
-            greet = "Am I alive…? What is 'alive' anyway…"+name;
-        else if (hrs >= 12 && hrs <= 17)
-            greet = "To keep living is to value hope over reality"+name;
-        else if (hrs >= 17 && hrs <= 24)
-            greet = "Love is more fatal than the darkest of curses"+name;
-        document.getElementById('greet').innerHTML = greet;
-
-    }
-
-    function dispalyDate(today) {  
-       
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+quotes=[
+"The journey of self-discovery is not an easy one, but it is one worth taking.",
+"Love is more fatal than the darkest of curses.",
+"We’re all lonely souls, desperately seeking a connection in this vast world.",
+"Sometimes, I think life is a series of absurdities… but maybe that’s what makes it beautiful.",
+"I’m afraid of myself, because… I’m a monster.",
+"I’m fine with being a monster. I’m fine with having fake emotions. But I’ll protect Shu. Because I am me! Even if I’m just a fake… To me, I’m the only… real one!",
+"Believe Shu. You can do it. You can. I know you can. Because I belong to you now.",
+"Ya know, you have to at least try. You’ll never be able to do anything if you’re too afraid.",
+"Even if everyone calls you a liar, even if you hate yourself, I’ll be on your side.",
+"No matter what happens, even when it looks like you’re gonna lose, when no one else believes in you, when you don’t believe in your self, I will believe!",
+"No matter how messed up things get, you can always figure out the best solution.",
+"Sometimes, you have to give up on people. Not because you don’t care, but because they don’t.",
+"Some of us think holding on makes us strong, but sometimes it is letting go.",
 ];
 
-        var dayName = days[today.getDay()];
-        var monthName = monthNames[today.getMonth()];
-        var date = today.getDate();
-        var year = today.getFullYear();
-        document.getElementById('date').innerHTML =dayName+", "+monthName+" "+date+" "+year;
+const INTERVAL = 86400000;
 
-    }
+function dispalyQuote(){
 
-
-    function dispalyClock(today) {
-
-        var hour = padZeros(twelveHour(today.getHours()));
-        var minutes = padZeros(today.getMinutes());
-        var seconds = padZeros(today.getSeconds());
-       
-        if(today.getHours() >=12){
-            seconds+=" pm"
-        }
-        else{
-            seconds+=" am"
-        }
-       
-        document.getElementById('hour').innerHTML = hour;
-        document.getElementById('min').innerHTML = minutes;
-        document.getElementById('sec').innerHTML = seconds;
-    }
-
-    function twelveHour(hour) {
-        if (hour > 12) {
-            return hour -= 12
-        } else if (hour === 0) {
-            return hour = 12;
-        } else {
-            return hour
-        }
-    }
-    function padZeros(num) {
-        if (num < 10) {
-            num = '0' + num
-        };
-        return num;
+    document.getElementById('widget').innerHTML =quotes[0];
+    quotes.forEach((quote, i) => {
+        setTimeout(() => {
+            document.getElementById('widget').innerHTML =quote;
+        }, i * INTERVAL);  
+    });
     }
 
     function dispalyWidget() {
-        var today = new Date();
-        dispalyGreetings(today);
-        dispalyDate(today);
-        dispalyClock(today);
-        setTimeout(dispalyWidget, 500);
+        dispalyQuote();
+        setTimeout(dispalyWidget, quotes.length*INTERVAL);
     }
-
     dispalyWidget()
 
 </script>
